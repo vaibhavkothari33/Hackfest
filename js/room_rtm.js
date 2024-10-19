@@ -6,7 +6,7 @@ let handleMemberJoined = async (MemberId) => {
     updateMemberTotal(members)
 
     let {name} = await rtmClient.getUserAttributesByKeys(MemberId, ['name'])
-    addBotMessageToDom(`Welcome to the room ${name}! 👋`)
+    addBotMessageToDom(`Welcome  to the room ${name}! 👋`)
 }
 
 let addMemberToDom = async (MemberId) => {

@@ -387,6 +387,38 @@ input:valid ~ label {
       });
   });
 
+
+  document.getElementById('myForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const name = document.getElementById('nameForm').value;
+    const email = document.getElementById('emailForm').value;
+    const password = document.getElementById('passForm').value;
+    const confirmPassword = document.getElementById('passFormCNF').value;
+
+    if (password !== confirmPassword) {
+      alert('Passwords do not match!');
+      return;
+    }
+
+    // Sign up user with Firebase
+    auth.createUserWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+
+        // Optionally, store additional user information (like name) in Firebase Firestore or Realtime Database
+        // e.g., firebase.firestore().collection('users').add({ uid: user.uid, name: name, email: user.email })
+
+        alert('User signed up successfully');
+        // Redirect to lobby page
+        window.location.href = './src/lobby.html';
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert('Error: ' + errorMessage);
+      });
+  });
 </script>
 
 <script>
